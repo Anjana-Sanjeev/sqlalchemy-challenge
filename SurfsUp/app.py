@@ -135,18 +135,18 @@ def start_date(start):
 
     session = Session(engine)
     sel = [func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)]
-    start_date_TOBS = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= recent_date[0]).all()
+    start_date_tobs = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= recent_date[0]).all()
     session.close()
 
-    start_TOBS = []
-    for min, max, avg in start_date_TOBS:
+    start_tobs = []
+    for min, max, avg in start_date_tobs:
         start_tobs_dict = {}
         start_tobs_dict["T_Min"] = min
         start_tobs_dict["T_Max"] = max
         start_tobs_dict["T_Average"] = avg
-        start_TOBS.append(start_tobs_dict)
+        start_tobs.append(start_tobs_dict)
 
-    return jsonify(start_TOBS)
+    return jsonify(start_tobs)
 
 # Temperature data from the given start date to end date
 
@@ -156,18 +156,18 @@ def start_end_date(start, end):
 
     session = Session(engine)
     sel = [func.min(Measurement.tobs), func.max(Measurement.tobs), func.avg(Measurement.tobs)]
-    start_end_date_TOBS = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
+    start_end_date_tobs = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
     session.close()
 
-    start_end_TOBS = []
-    for min, max , avg in start_end_date_TOBS:
+    start_end_tobs = []
+    for min, max , avg in start_end_date_tobs:
         start_end_tobs_dict = {}
         start_end_tobs_dict["T_Min"] = min
         start_end_tobs_dict["T_Max"] = max
         start_end_tobs_dict["T_Average"] = avg
-        start_end_TOBS.append(start_end_tobs_dict)
+        start_end_tobs.append(start_end_tobs_dict)
 
-    return jsonify(start_end_TOBS)
+    return jsonify(start_end_tobs)
 
 if __name__ == "__main__":
     app.run(debug = True)
